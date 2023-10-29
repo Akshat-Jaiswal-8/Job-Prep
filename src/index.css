@@ -1,3 +1,24 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+
+body{
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    background-color: black;
+}
+
+@layer base {
+    :root {
+        --color-primary: #14213d;
+        --color-secondary: #6e44ff;
+        --color-tertiary: #957fef;
+
+        /* ... */
+    }
+}

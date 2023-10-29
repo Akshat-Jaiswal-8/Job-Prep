@@ -2,13 +2,10 @@ import { Link, useNavigate } from "react-router-dom";
 import { useContext, useState } from "react";
 import { login as loginApi, signInWithGitHub } from "../services/apiAuth.js";
 import { BsGithub } from "react-icons/bs";
-import { themeContext } from "../context.js";
 
 export const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-
-  const [theme, setTheme] = useContext(themeContext);
 
   const navigate = useNavigate();
 

@@ -1,21 +1,16 @@
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import "react-lazy-load-image-component/src/effects/blur.css";
 import { supabase } from "../services/supabase.js";
-import { useContext, useEffect, useState } from "react";
-import { themeContext } from "../context.js";
+import { useEffect, useState } from "react";
 
 export const Navbar = () => {
-  const navigate = useNavigate();
   const [user, setUser] = useState(null);
-  const Themes = ["light", "dark", "cupcake", "forest"];
   useEffect(() => {
     (async () => {
       const { data: user } = await supabase.auth.getUser();
       setUser(user.user);
     })();
-  }, []);
-
-  const [theme, setTheme] = useContext(themeContext);
+  }, [user]);
 
   const handleLogout = async () => {
     const { error } = await supabase.auth.signOut();
@@ -26,57 +21,43 @@ export const Navbar = () => {
     }
   };
 
-  const changeTheme = (theme) => {
-    const html = document.querySelector("html");
-    html.setAttribute("data-theme", theme);
-  };
   return (
-    <nav className="navbar max-h-[13vh] bg-base-100">
-      <div className="flex-1">
-        <Link to={"/"} className="btn btn-ghost normal-case text-xl m-4">
+    <nav
+      className="mx-20 my-6 border-gray-600 shadow-indigo-500/40
+     rounded-3xl shadow-xl"
+    >
+      <div className="flex justify-between">
+        <Link to={"/"} className="text-3xl inline-flex items-center m-4">
           <span>
-            <img
-              alt={"logo"}
-              effect={"blur"}
-              className={"h-10"}
-              src={"/logo.png"}
-            />
+            <img alt={"logo"} className={"h-16"} src={"/logo.png"} />
           </span>
-          <span className={"font-bold font-poppins"}>JOB PREP</span>
+          <span className={"font-bold font-poppins"}>Job Prep</span>
         </Link>
-      </div>
-      <div className="flex-none p-4">
-        {user == null ? (
-          <Link to={"/register"} className="btn btn-accent">
-            Sign Up/Sign In
-          </Link>
-        ) : (
-          <button className="btn btn-accent" onClick={handleLogout}>
-            Logout
-          </button>
-        )}
-
-        <ul className="menu menu-horizontal px-1">
-          <li>
-            <details>
-              <summary>Themes</summary>
-              <ul className="p-2   bg-base-100">
-                {Themes.map((theme, index) => (
-                  <li key={index}>
-                    <button
-                      onClick={() => {
-                        changeTheme(theme);
-                        setTheme(theme);
-                      }}
-                    >
-                      {theme}
-                    </button>
-                  </li>
-                ))}
-              </ul>
-            </details>
-          </li>
-        </ul>
+        <div className="flex items-center mr-10">
+          {user == null ? (
+            <div className="inline-flex group text-lg gap-5 ">
+              <Link
+                to={"/register"}
+                className="hover:bg-indigo-800 hover:text-white text-gray-300 font-semibold rounded-xl p-3 transition-all duration-300"
+              >
+                Register
+              </Link>
+              <Link
+                to={"/login"}
+                className="hover:bg-indigo-800 hover:text-white text-gray-300 font-semibold rounded-xl p-3 transition-all duration-300"
+              >
+                Login
+              </Link>
+            </div>
+          ) : (
+            <button
+              className="hover:bg-indigo-800 hover:text-white text-gray-300 font-semibold rounded-xl p-3 transition-all duration-300"
+              onClick={handleLogout}
+            >
+              Logout
+            </button>
+          )}
+        </div>
       </div>
     </nav>
   );

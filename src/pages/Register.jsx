@@ -1,17 +1,13 @@
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { signInWithGitHub, signup } from "../services/apiAuth.js";
-import { useContext, useState } from "react";
+import { useState } from "react";
 import { BsGithub } from "react-icons/bs";
-import { themeContext } from "../context.js";
 
 export const Register = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const [theme, setTheme] = useContext(themeContext);
-
-  const navigate = useNavigate();
   const handleSubmit = async (e) => {
     e.preventDefault();
     const { data } = await signup({ fullName: name, email, password });
@@ -34,11 +30,7 @@ export const Register = () => {
     <div className={"flex flex-col items-center  justify-center"}>
       <h1 className={"text-5xl mt-16 mb-16 font-roboto"}>
         <span className={"flex gap-5"}>
-          <img
-            alt={"logo"}
-            className={"h-16  rounded-full"}
-            src={"/logo.png"}
-          />
+          <img alt={"logo"} className={"h-16 rounded-full"} src={"/logo.png"} />
           <Link
             to={"/"}
             className={

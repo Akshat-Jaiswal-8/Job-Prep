@@ -1,7 +1,5 @@
 import { Carousel } from "../ui/Carousel.jsx";
 import { Navbar } from "../ui/Navbar.jsx";
-import { Link } from "react-router-dom";
-import { BsArrowRight } from "react-icons/bs";
 
 export const Interview = () => {
   return (

@@ -6,6 +6,7 @@ import { Login } from "./pages/Login.jsx";
 import QuestionPage from "./pages/QuestionPage.jsx";
 import { ErrorPage } from "./pages/ErrorPage.jsx";
 import { login } from "./services/apiAuth.js";
+import {Footer} from "./ui/Footer.jsx";
 
 export default function App() {
   return (
@@ -18,6 +19,7 @@ export default function App() {
         <Route path={"interview/:subject"} element={<QuestionPage />} />
         <Route path={"*"} element={<ErrorPage />} />
       </Routes>
+      <Footer />
     </BrowserRouter>
   );
 }

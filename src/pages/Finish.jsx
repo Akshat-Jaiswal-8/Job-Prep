@@ -1,4 +1,3 @@
-// eslint-disable-next-line react/prop-types
 export const Finish = ({ dispatch }) => {
   return (
     <div className="  rounded-full flex flex-col gap-5 justify-center items-center p-6 m-[20rem]">
